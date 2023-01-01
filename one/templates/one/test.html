@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    
+</head>
+<body>
+    <form method="POST" id="form" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        
+        <!-- <input type="button" id="submit" value="submit"> -->
+    </form>
+    <button id="question_button">ADD_QUESTION</button>
+
+    <button id="submit">SUBMIT</button>
+    <script  >
+        let form = document.getElementById('form')
+let addbutton = document.getElementById('button')
+
+
+$(document).ready(function(){
+  $("#question_button").click(function(){
+    let x = document.getElementsByClassName('question').length
+    $('#form').append(`<label >Write Question Text </label><br>`)
+    $('#form').append(`<input type="text" name = question_${x}  class = "question"><br>`)
+    
+    for(let i = 0;i<4;i++)
+    {
+        $('#form').append(`<label >ENTER OPTIONS TEXT </label><br>`)
+        $('#form').append(`<input type="text" name = option_${i}  class = "choice"><br>`)
+    }
+    
+    $('#form').append(`<label >SELECT CORRECT ANS  </label><br>`)
+    $('#form').append(`<select name="correct_ans" >
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+</select>`
+)
+  });
+});
+
+const submit_button = document.getElementById('submit')
+submit_button.addEventListener('click',()=>{
+    const x = document.createElement('input')
+    x.setAttribute('type','submit')
+    $(`#form`).append(x)
+    x.click()
+})
+    </script>
+</body>
+</html>
